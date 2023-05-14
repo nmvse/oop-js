@@ -1,4 +1,4 @@
-// Необходимо добавить все массивам в JavaScript метод filterMap, который принимает 2 функции: фильтр и map
+// Необходимо добавить всем массивам в JavaScript метод filterMap, который принимает 2 функции: фильтр и map
 
 Array.prototype.filterMap = function (filter, map) {
   return this.filter(filter).map(map)
