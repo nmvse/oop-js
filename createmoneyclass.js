@@ -53,4 +53,4 @@ const dollar = new Dollar(rub, 75);
 dollar.get() // 1.3
 
 // Надо сделать так, чтобы метод setMod можно было "чейнить"
-// dollar.setMod(80).get() // 1.2
+dollar.setMod(80).get() // 1.2
