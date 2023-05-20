@@ -6,45 +6,29 @@
 // Задание нужно сделать 2-мя способами: с помощью ES6 class и с помощью функций.
 
 class Money {
-  constructor(amount) {
-    this.amount = amount
-  }
-  get() {
-    return this.amount
-  }
-}
-
-class Rub extends Money {
-  constructor(amount) {
-    super(amount);
-  }
-}
-
-class Dollar extends Money {
-  constructor(currency, amount) {
-    super(amount);
-    this.currency = currency
-  }
-
-  get() {
-    return +(this.currency.get() / this.amount).toFixed(2)
-  }
-
-  setMod(amount) {
+  constructor(amount, rate = 1) {
+    if (!Number(amount) && !(amount instanceof Money)) {
+      throw new TypeError()
+    }
     this.amount = amount;
+    this.rate = rate
+  }
+  get() {
+    return typeof this.amount === 'number' ?
+      this.amount :
+      +(this.amount.amount / this.rate).toFixed(2)
+  }
+  setMod(value) {
+    this.rate = value
     return this
   }
 }
 
-class Euro extends Money {
-  constructor(amount) {
-    super(amount);
-  }
-}
+class Rub extends Money {}
+
+class Dollar extends Money {}
 
 const rub = new Rub(100);
-
-const euro = new Euro(85);
 
 rub.get(); // 100
 

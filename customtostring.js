@@ -19,3 +19,19 @@ addToString([1]).toString()
 
 //
 addToString([]).toString()
+
+// Недостатки решения: Метод реализован для всех массивов, а нам нужно сделать для конкретного. Для учета нескольких случаев эффективнее использовать конструкцию switch.
+
+/*
+Верное решение:
+  const addToString = (array) => {
+    array.toString = function () {
+      switch (this.length) {
+        case 0: return '';
+        case 1: return String(this[0]);
+        default: return `${this[0]}..${this.at(-1)}`
+      }
+    }
+    return array
+  }
+*/

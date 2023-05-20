@@ -1,8 +1,10 @@
 // Необходимо написать аналог Object.create с использованием new function
 
 function objectCreate(proto) {
-  objectCreate.prototype = proto
+  function factory() {}
+  factory.prototype = proto;
+  return new factory()
 }
 
 
-new objectCreate({a: 1})
+objectCreate({a: 1})

@@ -5,48 +5,46 @@
 // Курс конвертации можно менять с помощью метода.
 // Задание нужно сделать 2-мя способами: с помощью ES6 class и с помощью функций.
 
-function Money(amount) {
-  this.amount = amount
-}
-Money.prototype.get = function () {
-  return this.amount
+function Money(amount, rate = 1) {
+  this.amount = amount;
+  this.rate = rate
 }
 
-function Rub(amount) {
-  this.amount = amount
+Money.prototype.get = function () {
+  return typeof this.amount === 'number' ?
+    this.amount :
+    +(this.amount.amount / this.rate).toFixed(2)
 }
+
+Money.prototype.setMod = function (value) {
+    this.rate = value
+    return this
+}
+
+function Rub(amount, rate) {
+  this.amount = amount
+  this.rate = rate
+}
+
 Rub.prototype = Money.prototype
 
-function Euro(amount) {
+function Dollar(amount, rate) {
   this.amount = amount
-}
-
-Euro.prototype = Money.prototype
-
-function Dollar(currency, amount) {
-  this.amount = amount;
-  this.currency = currency;
-  this.get = function () {
-    return +(this.currency.get() / this.amount).toFixed(2)
-  }
-  this.setMod = function (amount) {
-    this.amount = amount;
-    return this
-  }
+  this.rate = rate
 }
 
 Dollar.prototype = Money.prototype
 
 const rub = new Rub(100);
 
-const euro = new Euro(85);
-
 rub.get(); // 100
-//
+
 const dollar = new Dollar(rub, 75);
-//
+
 dollar.get() // 1.3
-//
-// // Надо сделать так, чтобы метод setMod можно было "чейнить"
+
+// Надо сделать так, чтобы метод setMod можно было "чейнить"
 dollar.setMod(80).get() // 1.2
+
+console.log(new Dollar(new Rub(100), 75).get())
 
